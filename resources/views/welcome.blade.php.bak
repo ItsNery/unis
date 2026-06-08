@@ -1,0 +1,1903 @@
+﻿<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>UnIS - Secretaría de Planeación, Finanzas y Administración</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles & Scripts -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
+
+<body class="bg-[#fafaf9] text-slate-800 antialiased font-sans overflow-x-hidden" x-data="{
+    showModal: false,
+    modalType: '',
+    modalTitle: '',
+    modalDate: '',
+    modalContent: '',
+    modalImage: '',
+    modalExtra: '',
+    openModal(type, title, date, content, image, extra = '') {
+        this.modalType = type;
+        this.modalTitle = title;
+        this.modalDate = date;
+        this.modalContent = content;
+        this.modalImage = image;
+        this.modalExtra = extra;
+        this.showModal = true;
+    }
+}">
+
+    <!-- CURSOR INTERACTIVO -->
+    <div class="custom-cursor-dot hidden lg:block"></div>
+    <div class="custom-cursor-ring hidden lg:block"></div>
+
+    <!-- PRELOADER PREMIUM -->
+    <div id="preloader" class="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#5f1b2d] text-white">
+        <div class="preloader-content flex flex-col items-center space-y-6 text-center px-6">
+            <!-- Logo wrapper with ripple/pulse -->
+            <div
+                class="preloader-logo-wrap relative w-24 h-24 rounded-3xl bg-gradient-to-tr from-[#5f1b2d] via-[#861e34] to-[#246257] border-2 border-[#c79b66] shadow-2xl flex items-center justify-center overflow-hidden">
+                <span class="font-serif font-bold text-white text-3xl tracking-widest">UnIS</span>
+                <div
+                    class="preloader-shine absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full">
+                </div>
+            </div>
+            <!-- Title / Loading status -->
+            <div class="space-y-2 overflow-hidden">
+                <h2
+                    class="preloader-title text-lg md:text-xl font-bold font-serif text-[#c79b66] tracking-wide translate-y-full">
+                    Unidad de Igualdad Sustantiva</h2>
+                <p class="preloader-subtitle text-[10px] uppercase tracking-[0.3em] text-white/60 translate-y-full">
+                    Secretaría de Planeación, Finanzas y Administración</p>
+            </div>
+            <!-- Progress bar track -->
+            <div class="w-48 h-1 bg-white/10 rounded-full overflow-hidden relative mt-4">
+                <div class="preloader-progress-bar absolute left-0 top-0 bottom-0 bg-[#c79b66] rounded-full w-0"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Background Glows (Subtle and soft for light mode) -->
+    <div class="bg-glow-purple top-10 left-10"></div>
+    <div class="bg-glow-gold top-[120vh] right-10"></div>
+    <div class="bg-glow-green top-[250vh] left-[20%]"></div>
+    <div class="bg-glow-purple bottom-20 right-20"></div>
+
+    <!-- Navigation Bar -->
+    <nav
+        class="sticky top-0 w-full z-50 px-6 py-3.5 flex items-center justify-between bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-sm">
+        <div class="flex items-center space-x-3.5">
+            <!-- Logo UIS Veda cargado de public/img/logos/logo_uis_veda.png con Fallback SVG -->
+            <div class="relative flex items-center">
+                <img src="{{ asset('img/logos/Logos-SPFA-UNIS.png') }}"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" alt="UnIS Logo"
+                    class="w-[400px] h-auto object-contain">
+
+                <div class="hidden items-center space-x-2.5">
+                    <div
+                        class="w-9 h-9 rounded-lg flex items-center justify-center bg-gradient-to-br from-[#861e34] to-[#5f1b2d] border border-[#c79b66]/30 shadow-md">
+                        <span class="font-serif font-bold text-white text-base tracking-widest">UI</span>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-sm font-bold tracking-wider text-[#5f1b2d]">UnIS</span>
+                        <span class="text-[9px] uppercase tracking-widest text-[#246257] font-semibold">Igualdad
+                            Sustantiva</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex items-center space-x-6">
+            <!-- Links de Scroll Rápido -->
+            <div
+                class="hidden lg:flex items-center space-x-6 text-xs uppercase tracking-widest font-bold text-slate-600">
+                <a href="#inicio" class="hover:text-[#5f1b2d] transition-colors">Inicio</a>
+                <a href="#contenido-seccion" class="hover:text-[#5f1b2d] transition-colors">Actualidad</a>
+                <a href="#que-hacemos" class="hover:text-[#5f1b2d] transition-colors">Funciones</a>
+                <a href="#lineas-accion" class="hover:text-[#5f1b2d] transition-colors">Líneas de Acción</a>
+                <a href="#pronunciamientos" class="hover:text-[#5f1b2d] transition-colors">Voces</a>
+                <a href="#transparencia" class="hover:text-[#5f1b2d] transition-colors">Transparencia</a>
+                <a href="#buzon" class="hover:text-[#5f1b2d] transition-colors">Buzón</a>
+                <a href="#titular" class="hover:text-[#5f1b2d] transition-colors">Mensaje</a>
+                <a href="#identidad" class="hover:text-[#5f1b2d] transition-colors">Identidad</a>
+                <a href="#contacto" class="hover:text-[#5f1b2d] transition-colors">Contacto</a>
+            </div>
+
+            @if (Route::has('login'))
+                <div>
+                    @auth
+                        <a href="{{ url('/dashboard') }}"
+                            class="px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-wider border border-[#5f1b2d]/30 bg-[#5f1b2d]/10 hover:bg-[#5f1b2d]/20 text-[#5f1b2d] transition-all">
+                            Dashboard
+                        </a>
+                    @else
+                        <a href="{{ route('login') }}"
+                            class="px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-wider border border-[#5f1b2d]/20 bg-slate-100 hover:bg-slate-200 text-slate-700 hover:text-slate-900 transition-all">
+                            Panel Admin
+                        </a>
+                    @endauth
+                </div>
+            @endif
+        </div>
+    </nav>
+
+    <!-- Secciones -->
+    <div class="stack-container relative z-10">
+
+        <!-- 1. HERO / INICIO -->
+        <section id="inicio"
+            class="stack-panel min-h-[90vh] w-full flex flex-col justify-center items-center px-6 relative py-12">
+            <div class="text-center max-w-4xl">
+                <div class="hero-logo mb-6 inline-block">
+                    <!-- Isotipo UIS Veda con Fallback -->
+                    <div class="relative">
+                        <img src="{{ asset('img/logos/isotipo_UnIS.png') }}"
+                            onerror="this.src='{{ asset('img/logos/logo_uis_veda.png') }}'; this.onerror=function(){this.style.display='none'; this.nextElementSibling.style.display='flex';};"
+                            alt="UnIS Logo" class="h-24 w-auto object-contain mx-auto">
+
+                        <div
+                            class="hidden w-28 h-28 rounded-3xl mx-auto items-center justify-center bg-gradient-to-tr from-[#5f1b2d] via-[#861e34] to-[#246257] border-2 border-[#c79b66] shadow-md">
+                            <span class="font-serif font-bold text-white text-4xl tracking-widest">UnIS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-text mt-4">
+                    <span class="text-xs uppercase tracking-[0.4em] font-semibold text-[#246257] mb-2 block">Secretaría
+                        de Planeación, Finanzas y Administración</span>
+                    <h1
+                        class="text-3xl md:text-6xl font-bold tracking-tight font-serif mb-6 leading-tight text-[#5f1b2d]">
+                        <span class="inline-block overflow-hidden"><span class="inline-block hero-title-line">Unidad
+                                de</span></span><br>
+                        <span class="inline-block overflow-hidden"><span
+                                class="inline-block hero-title-line text-gradient-purple font-sans italic">Igualdad
+                                Sustantiva</span></span>
+                    </h1>
+                    <div class="w-20 h-1 bg-[#c79b66] mx-auto mb-6"></div>
+                    <p class="text-slate-600 text-sm md:text-base max-w-2xl mx-auto mb-10 leading-relaxed font-light">
+                        Coordinamos y evaluamos el acceso pleno a los derechos humanos y el desarrollo integral de las
+                        mujeres y hombres del estado de Puebla, eliminando la discriminación y brechas de género en la
+                        administración pública.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                        <a href="#contenido-seccion"
+                            class="px-8 py-3.5 rounded-full text-xs font-bold uppercase tracking-wider bg-gradient-to-r from-[#5f1b2d] to-[#861e34] text-white hover:opacity-90 hover:scale-105 transition-all duration-300 border border-[#c79b66]/30 shadow-md shadow-[#5f1b2d]/10">
+                            Explorar Novedades
+                        </a>
+                        <a href="#titular"
+                            class="px-8 py-3.5 rounded-full text-xs font-bold uppercase tracking-wider border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 transition-all">
+                            Mensaje de la Titular
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Indicador de Scroll -->
+            <div class="absolute bottom-24 left-1/2 -translate-x-1/2 flex flex-col items-center space-y-1.5 opacity-60">
+                <span class="text-[9px] uppercase tracking-widest text-slate-500 font-bold">Desliza para explorar</span>
+                <div class="w-5 h-8 rounded-full border border-slate-400 flex justify-center p-1">
+                    <div class="w-1.5 h-1.5 bg-[#c79b66] rounded-full animate-bounce"></div>
+                </div>
+            </div>
+
+            <!-- Cinta de Texto Infinito Premium (Lando Norris style) -->
+            <div
+                class="absolute bottom-0 left-0 w-full overflow-hidden bg-slate-900 border-t border-[#c79b66]/20 py-3.5 select-none z-20">
+                <div
+                    class="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-slate-900 to-transparent z-10 pointer-events-none">
+                </div>
+                <div
+                    class="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-slate-900 to-transparent z-10 pointer-events-none">
+                </div>
+
+                <div
+                    class="animate-marquee-track flex gap-12 items-center whitespace-nowrap text-[11px] md:text-xs font-serif uppercase tracking-[0.25em] text-[#c79b66] font-bold">
+                    <span>Unidad de Igualdad Sustantiva de la Secretaría de Planeación, Finanzas y Administración</span>
+                    <span class="text-[#c79b66]/30 text-lg">•</span>
+                    <span>Derechos Humanos</span>
+                    <span class="text-[#c79b66]/30 text-lg">•</span>
+                    <span>Prevención y Equidad</span>
+                    <span class="text-[#c79b66]/30 text-lg">•</span>
+                    <span>Acceso a la Justicia</span>
+                    <span class="text-[#c79b66]/30 text-lg">•</span>
+                    <span>Empoderamiento Sustentable</span>
+                    <span class="text-[#c79b66]/30 text-lg">•</span>
+                    <span>Cultura de Respeto</span>
+                    <span class="text-[#c79b66]/30 text-lg">•</span>
+
+                    <!-- Duplicado idéntico para que el bucle infinito sea invisible y fluido -->
+                    <span>Unidad de Igualdad Sustantiva de la Secretaría de Planeación, Finanzas y Administración</span>
+                    <span class="text-[#c79b66]/30 text-lg">•</span>
+                    <span>Derechos Humanos</span>
+                    <span class="text-[#c79b66]/30 text-lg">•</span>
+                    <span>Prevención y Equidad</span>
+                    <span class="text-[#c79b66]/30 text-lg">•</span>
+                    <span>Acceso a la Justicia</span>
+                    <span class="text-[#c79b66]/30 text-lg">•</span>
+                    <span>Empoderamiento Sustentable</span>
+                    <span class="text-[#c79b66]/30 text-lg">•</span>
+                    <span>Cultura de Respeto</span>
+                    <span class="text-[#c79b66]/30 text-lg">•</span>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- 2. SECCIÓN GSAP DE SCROLL HORIZONTAL (Actualidad, Eventos, Comunicados) -->
+        <section id="contenido-seccion"
+            class="stack-panel horizontal-scroll-section relative overflow-hidden bg-slate-50 border-y border-slate-200">
+            <div class="horizontal-scroll-wrap">
+
+                <!-- Panel Intro Secciones -->
+                <div
+                    class="horizontal-panel flex items-center justify-center px-12 bg-gradient-to-r from-white to-slate-50">
+                    <div class="max-w-xl text-left gsap-fade-in">
+                        <span class="text-xs uppercase tracking-[0.3em] font-bold text-[#c79b66] mb-2 block">Actualidad
+                            & Novedades</span>
+                        <h2 class="text-3xl md:text-4xl font-bold font-serif text-[#5f1b2d] mb-4 leading-tight">Acceso
+                            y
+                            Lectura Rápida</h2>
+                        <p class="text-slate-600 text-sm md:text-base leading-relaxed mb-6 font-light">
+                            Explora las noticias recientes, cartelera oficial de eventos y descarga comunicados
+                            oficiales de la Unidad. Haz clic en las tarjetas para expandir los detalles sin interrumpir
+                            tu navegación.
+                        </p>
+                        <div
+                            class="flex items-center space-x-3 text-xs text-[#246257] font-bold uppercase tracking-widest">
+                            <span>Desliza para avanzar</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 animate-pulse" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Panel A: Actualidad (Noticias) -->
+                <div
+                    class="horizontal-panel flex flex-col justify-center px-6 md:px-12 bg-gradient-to-r from-slate-50 to-slate-100/50">
+                    <div class="max-w-6xl w-full mx-auto">
+                        <div class="flex justify-between items-end mb-5 lg:mb-6">
+                            <div>
+                                <span class="text-xs uppercase tracking-wider text-[#246257] font-bold">Sección
+                                    01</span>
+                                <h3 class="text-2xl md:text-3xl font-bold font-serif text-[#5f1b2d]">Actualidad</h3>
+                            </div>
+                            <span class="text-xs text-slate-500 hidden sm:inline">Últimas publicaciones</span>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            @forelse ($news as $item)
+                                <div @click="openModal('Noticia', '{{ $item->title }}', '{{ $item->published_at->format('d/m/Y') }}', '{{ addslashes($item->content) }}', '{{ $item->image_path }}')"
+                                    class="glass-card rounded-2xl p-6 flex flex-col justify-between cursor-pointer transition-all duration-300 transform hover:-translate-y-1.5 lg:h-[310px] h-[340px] relative group overflow-hidden bg-white border border-[#c79b66]/20">
+                                    <div class="absolute inset-x-0 top-0 h-1 bg-[#5f1b2d] opacity-80"></div>
+                                    <div>
+                                        <span
+                                            class="text-[10px] uppercase tracking-widest text-[#c79b66] font-bold block mb-3">
+                                            {{ $item->published_at ? $item->published_at->format('d M, Y') : '' }}
+                                        </span>
+                                        <h4
+                                            class="text-base font-bold font-serif line-clamp-3 group-hover:text-[#5f1b2d] transition-all mb-4 text-slate-900 leading-snug">
+                                            {{ $item->title }}
+                                        </h4>
+                                        <p class="text-xs text-slate-600 line-clamp-4 font-light leading-relaxed">
+                                            {{ strip_tags($item->content) }}
+                                        </p>
+                                    </div>
+                                    <div
+                                        class="flex items-center space-x-2 text-[10px] font-bold uppercase tracking-widest text-[#5f1b2d] group-hover:text-[#861e34] transition-colors mt-4">
+                                        <span>Leer más</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            class="h-3 w-3 transform group-hover:translate-x-1 transition-transform"
+                                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M9 5l7 7-7 7" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            @empty
+                                <div
+                                    class="col-span-3 py-12 text-center text-slate-400 font-light bg-white border border-slate-200 rounded-2xl">
+                                    No hay noticias publicadas por el momento.
+                                </div>
+                            @endforelse
+                        </div>
+
+                        <!-- Botón Ver Todos -->
+                        <div class="mt-5 lg:mt-6 flex justify-end">
+                            <a href="{{ route('public.news') }}"
+                                class="px-6 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-white border border-[#5f1b2d]/25 text-[#5f1b2d] hover:bg-[#5f1b2d]/5 transition-all shadow-sm">
+                                Ver todas las noticias
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Panel B: Novedades / Eventos Próximos -->
+                <div
+                    class="horizontal-panel flex flex-col justify-center px-6 md:px-12 bg-gradient-to-r from-slate-100/50 to-slate-50">
+                    <div class="max-w-6xl w-full mx-auto">
+                        <div class="flex justify-between items-end mb-5 lg:mb-6">
+                            <div>
+                                <span class="text-xs uppercase tracking-wider text-[#246257] font-bold">Sección
+                                    02</span>
+                                <h3 class="text-2xl md:text-3xl font-bold font-serif text-[#5f1b2d]">Eventos Próximos
+                                </h3>
+                            </div>
+                            <span class="text-xs text-slate-500 hidden sm:inline">Únete y participa</span>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            @forelse ($events as $event)
+                                <div @click="openModal('Evento', '{{ $event->title }}', '{{ $event->event_date->format('d/m/Y H:i') }}', '{{ addslashes($event->description) }}', '{{ $event->image_path }}', '{{ $event->location }}|{{ $event->external_link }}')"
+                                    class="glass-card rounded-2xl p-6 flex flex-col justify-between cursor-pointer transition-all duration-300 transform hover:-translate-y-1.5 lg:h-[310px] h-[340px] relative group overflow-hidden bg-white border border-[#c79b66]/20">
+                                    <div class="absolute inset-x-0 top-0 h-1 bg-[#246257] opacity-80"></div>
+                                    <div>
+                                        <div class="flex items-center justify-between mb-3">
+                                            <span
+                                                class="text-[10px] uppercase tracking-widest text-[#246257] font-bold">
+                                                {{ $event->event_date->format('d M, Y') }}
+                                            </span>
+                                            <span
+                                                class="px-2 py-0.5 rounded text-[8px] uppercase tracking-wider bg-slate-100 text-slate-700 border border-slate-200">
+                                                {{ $event->event_date->format('H:i') }} hrs
+                                            </span>
+                                        </div>
+                                        <h4
+                                            class="text-base font-bold font-serif line-clamp-2 group-hover:text-[#246257] transition-all mb-3 text-slate-900 leading-snug">
+                                            {{ $event->title }}
+                                        </h4>
+                                        <p class="text-xs text-slate-600 line-clamp-4 font-light leading-relaxed mb-2">
+                                            {{ $event->description }}
+                                        </p>
+                                        @if ($event->location)
+                                            <div class="flex items-center space-x-1.5 text-[10px] text-slate-500 mt-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                    class="h-3.5 w-3.5 text-[#c79b66]" fill="none"
+                                                    viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                </svg>
+                                                <span class="truncate">{{ $event->location }}</span>
+                                            </div>
+                                        @endif
+                                    </div>
+                                    <div
+                                        class="flex items-center space-x-2 text-[10px] font-bold uppercase tracking-widest text-[#5f1b2d] group-hover:text-[#861e34] transition-colors mt-4">
+                                        <span>Detalles de evento</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            class="h-3 w-3 transform group-hover:translate-x-1 transition-transform"
+                                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M9 5l7 7-7 7" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            @empty
+                                <div
+                                    class="col-span-3 py-12 text-center text-slate-400 font-light bg-white border border-slate-200 rounded-2xl">
+                                    No hay eventos programados en este momento.
+                                </div>
+                            @endforelse
+                        </div>
+
+                        <!-- Botón Ver Todos -->
+                        <div class="mt-5 lg:mt-6 flex justify-end">
+                            <a href="{{ route('public.events') }}"
+                                class="px-6 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-white border border-[#246257]/25 text-[#246257] hover:bg-[#246257]/5 transition-all shadow-sm">
+                                Ver todos los eventos
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Panel C: Ventanilla de Comunicados -->
+                <div
+                    class="horizontal-panel flex flex-col justify-center px-6 md:px-12 bg-gradient-to-r from-slate-50 to-white">
+                    <div class="max-w-6xl w-full mx-auto">
+                        <div class="flex justify-between items-end mb-5 lg:mb-6">
+                            <div>
+                                <span class="text-xs uppercase tracking-wider text-[#246257] font-bold">Sección
+                                    03</span>
+                                <h3 class="text-2xl md:text-3xl font-bold font-serif text-[#5f1b2d]">Ventanilla de
+                                    Comunicados</h3>
+                            </div>
+                            <span class="text-xs text-slate-500 hidden sm:inline">Prensa y descargas</span>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            @forelse ($communiques as $comm)
+                                <div
+                                    class="glass-card rounded-2xl p-5 flex flex-col justify-between h-[210px] group transition-all duration-300 relative overflow-hidden bg-white border border-slate-200/80 hover:shadow-md">
+                                    <div
+                                        class="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-[#5f1b2d] via-[#c79b66] to-[#0c312d]">
+                                    </div>
+                                    <div>
+                                        <div
+                                            class="flex items-center justify-between mb-3 text-[10px] text-slate-400 font-bold">
+                                            <span>COMUNICADO OFICIAL</span>
+                                            <span>{{ $comm->published_at ? $comm->published_at->format('d/m/Y') : '' }}</span>
+                                        </div>
+                                        <h4
+                                            class="text-sm font-bold text-slate-900 group-hover:text-[#5f1b2d] transition-colors line-clamp-2 leading-snug">
+                                            {{ $comm->title }}
+                                        </h4>
+                                        <p class="text-xs text-slate-500 mt-2 line-clamp-3 font-light leading-relaxed">
+                                            {{ $comm->summary }}
+                                        </p>
+                                    </div>
+
+                                    <div class="flex items-center justify-between mt-4">
+                                        @if ($comm->file_path)
+                                            <a href="{{ asset('storage/' . $comm->file_path) }}" target="_blank"
+                                                class="flex items-center space-x-2 text-[10px] font-bold uppercase tracking-widest text-[#246257] hover:text-[#5f1b2d] transition-colors">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4"
+                                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                                </svg>
+                                                <span>Descargar PDF</span>
+                                            </a>
+                                        @else
+                                            <span class="text-[9px] text-slate-400 uppercase tracking-widest">Sin
+                                                archivo adjunto</span>
+                                        @endif
+
+                                        <button
+                                            @click="openModal('Comunicado', '{{ $comm->title }}', '{{ $comm->published_at ? $comm->published_at->format('d/m/Y') : '' }}', '{{ addslashes($comm->summary) }}', '{{ $comm->image_path }}')"
+                                            class="text-xs text-slate-500 hover:text-[#5f1b2d] underline font-medium">
+                                            Ver
+                                        </button>
+                                    </div>
+                                </div>
+                            @empty
+                                <div
+                                    class="col-span-3 py-12 text-center text-slate-400 font-light bg-white border border-slate-200 rounded-2xl">
+                                    No hay comunicados oficiales en este momento.
+                                </div>
+                            @endforelse
+                        </div>
+
+                        <!-- Botón Ver Todos -->
+                        <div class="mt-5 lg:mt-6 flex justify-end">
+                            <a href="{{ route('public.communiques') }}"
+                                class="px-6 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-white border border-[#5f1b2d]/25 text-[#5f1b2d] hover:bg-[#5f1b2d]/5 transition-all shadow-sm">
+                                Ver todos los comunicados
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- 3. MENSAJE DE LA TITULAR (Pinning / Scroll Vertical) -->
+        <section id="titular"
+            class="stack-panel min-h-screen w-full flex items-center justify-center px-6 py-20 relative overflow-hidden bg-white border-b border-slate-200">
+            <div class="max-w-5xl w-full mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 items-center z-10">
+                <!-- Foto Titular o Escudo Decorado -->
+                <div class="col-span-1 md:col-span-5 flex justify-center gsap-fade-in">
+                    <div class="relative group">
+                        <!-- Marco decorativo en gradiente -->
+                        <div
+                            class="absolute inset-0 bg-gradient-to-tr from-[#5f1b2d] via-[#c79b66] to-[#246257] rounded-3xl blur-xl opacity-20 group-hover:opacity-35 transition-opacity duration-500">
+                        </div>
+
+                        <div
+                            class="relative w-72 h-80 md:w-80 md:h-[400px] rounded-3xl overflow-hidden border border-[#c79b66]/40 bg-[#fbfbfa] flex items-center justify-center p-4 shadow-sm">
+                            @if ($settings['titular_image'])
+                                <img src="{{ asset('storage/' . $settings['titular_image']) }}"
+                                    alt="{{ $settings['titular_name'] }}"
+                                    class="w-full h-full object-cover rounded-2xl gsap-parallax-img">
+                            @else
+                                <!-- Silueta/Avatar Institucional en SVG si no hay imagen subida -->
+                                <div class="flex flex-col items-center text-center space-y-4 gsap-parallax-img">
+                                    <div class="relative">
+                                        <img src="{{ asset('img/logos/logo_uis_veda.png') }}"
+                                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                                            alt="UnIS Logo" class="h-28 w-auto object-contain">
+                                        <div
+                                            class="hidden w-24 h-24 rounded-full bg-slate-100 items-center justify-center text-slate-300">
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="h-14 w-14 text-[#c79b66]/60" fill="none"
+                                                viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    stroke-width="1.5"
+                                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs uppercase tracking-widest text-[#246257] font-bold">Secretaría
+                                        de Planeación, Finanzas y Administración</span>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mensaje / Texto -->
+                <div class="col-span-1 md:col-span-7 space-y-6 text-left gsap-fade-in">
+                    <span class="text-xs uppercase tracking-[0.3em] font-bold text-[#246257]">Nuestra Dirección</span>
+
+                    <div class="space-y-1">
+                        <h2 class="text-2xl md:text-3xl font-bold font-serif text-slate-900 leading-tight">
+                            {{ $settings['titular_name'] }}
+                        </h2>
+                        <p class="text-xs font-bold uppercase tracking-widest text-[#5f1b2d]">
+                            {{ $settings['titular_title'] }}
+                        </p>
+                    </div>
+
+                    <!-- Bloque de frase destacada -->
+                    <blockquote
+                        class="border-l-4 border-[#c79b66] pl-6 py-2 italic text-[#5f1b2d] text-lg md:text-xl font-light font-serif leading-relaxed bg-slate-50 pr-4">
+                        "{{ $settings['titular_phrase'] }}"
+                    </blockquote>
+
+                    <p class="text-sm text-slate-600 leading-relaxed font-light">
+                        Desde la Unidad de Igualdad Sustantiva del Gobierno del Estado de Puebla, trabajamos para tejer
+                        redes institucionales capaces de cerrar brechas. Creemos que la transformación social radica en
+                        erradicar prácticas discriminatorias arraigadas, y a través de esta ventanilla, damos a conocer
+                        cada avance del proyecto común.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- 4. MISIÓN, VISIÓN Y VALORES -->
+        <section id="identidad"
+            class="stack-panel min-h-screen w-full flex items-center justify-center px-6 py-20 bg-slate-50 relative overflow-hidden border-b border-slate-200">
+            <div class="max-w-6xl w-full mx-auto z-10 text-center space-y-16">
+                <div class="max-w-xl mx-auto space-y-3 gsap-fade-in">
+                    <span class="text-xs uppercase tracking-[0.4em] font-bold text-[#c79b66]">Institucional</span>
+                    <h2 class="text-3xl md:text-4xl font-bold font-serif text-[#5f1b2d]">Identidad e Igualdad</h2>
+                    <div class="w-16 h-1 bg-[#5f1b2d] mx-auto mt-2"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 border border-[#c79b66]/25 rounded-3xl overflow-hidden bg-white shadow-sm">
+                    <!-- Mision -->
+                    <div
+                        class="glass-card p-8 md:p-10 text-left space-y-4 hover:bg-slate-50/50 transition-colors duration-300 gsap-fade-in flex flex-col justify-between border-b md:border-b-0 md:border-r border-[#c79b66]/20 bg-white">
+                        <div class="space-y-4">
+                            <div
+                                class="w-11 h-11 rounded-xl flex items-center justify-center bg-[#5c1d91]/5 border border-[#5c1d91]/20 text-[#5c1d91]">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5.5 w-5.5" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-bold font-serif text-slate-900">Misión</h3>
+                            <p class="text-xs text-slate-600 leading-relaxed font-light">
+                                {{ $settings['mission'] }}
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Vision -->
+                    <div
+                        class="glass-card p-8 md:p-10 text-left space-y-4 hover:bg-slate-50/50 transition-colors duration-300 gsap-fade-in flex flex-col justify-between border-b md:border-b-0 md:border-r border-[#c79b66]/20 bg-white">
+                        <div class="space-y-4">
+                            <div
+                                class="w-11 h-11 rounded-xl flex items-center justify-center bg-[#246257]/5 border border-[#246257]/20 text-[#246257]">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5.5 w-5.5" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-bold font-serif text-slate-900">Visión</h3>
+                            <p class="text-xs text-slate-600 leading-relaxed font-light">
+                                {{ $settings['vision'] }}
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Valores -->
+                    <div
+                        class="glass-card p-8 md:p-10 text-left space-y-4 hover:bg-slate-50/50 transition-colors duration-300 gsap-fade-in flex flex-col justify-between bg-white">
+                        <div class="space-y-4">
+                            <div
+                                class="w-11 h-11 rounded-xl flex items-center justify-center bg-[#861e34]/5 border border-[#861e34]/20 text-[#861e34]">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5.5 w-5.5" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-bold font-serif text-slate-900">Valores</h3>
+                            <p class="text-xs text-slate-600 leading-relaxed font-light">
+                                {{ $settings['values'] }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- 4.5 ¿QUÉ HACE LA UNIS? & ACCIONES REALIZADAS (Pestaña 2) -->
+        <section id="que-hacemos"
+            class="stack-panel min-h-screen w-full flex flex-col justify-center px-6 py-20 bg-white relative overflow-hidden border-b border-slate-200">
+            <div class="max-w-6xl w-full mx-auto z-10 space-y-16">
+
+                <!-- Encabezado de la Sección -->
+                <div class="max-w-2xl text-left space-y-3 gsap-fade-in">
+                    <span class="text-xs uppercase tracking-[0.4em] font-bold text-[#246257]">Funciones y
+                        Operación</span>
+                    <h2 class="text-3xl md:text-4xl font-bold font-serif text-[#5f1b2d]">Competencias, Estructura y
+                        Actividades</h2>
+                    <div class="w-16 h-1 bg-[#c79b66] mt-2"></div>
+                </div>
+
+                <!-- Grid de Qué Hace y Quién Constituye -->
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+
+                    <!-- Columna Izquierda: Qué Hacemos & Constitución -->
+                    <div class="col-span-1 md:col-span-6 space-y-8">
+                        <div
+                            class="bg-slate-50 border border-slate-100 rounded-3xl p-8 space-y-4 gsap-fade-in shadow-sm">
+                            <span class="text-[10px] uppercase tracking-widest text-[#c79b66] font-bold">Materia de
+                                Igualdad</span>
+                            <h3 class="text-xl font-bold font-serif text-slate-900">¿Qué hace la UnIS?</h3>
+                            <p class="text-xs md:text-sm text-slate-600 leading-relaxed font-light">
+                                {{ $settings['what_we_do'] }}
+                            </p>
+                        </div>
+
+                        <div
+                            class="bg-slate-50 border border-slate-100 rounded-3xl p-8 space-y-4 gsap-fade-in shadow-sm">
+                            <span
+                                class="text-[10px] uppercase tracking-widest text-[#246257] font-bold">Constitución</span>
+                            <h3 class="text-xl font-bold font-serif text-slate-900">¿Quién la constituye?</h3>
+                            <p class="text-xs md:text-sm text-slate-600 leading-relaxed font-light">
+                                {{ $settings['who_constitutes'] }}
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Columna Derecha: Competencias y Alcances -->
+                    <div
+                        class="col-span-1 md:col-span-6 bg-gradient-to-tr from-[#5f1b2d] to-[#861e34] text-white rounded-3xl p-8 space-y-6 gsap-fade-in shadow-lg border border-[#c79b66]/30">
+                        <div>
+                            <span class="text-[10px] uppercase tracking-widest text-[#c79b66] font-bold">Marco
+                                Competencial</span>
+                            <h3 class="text-2xl font-bold font-serif text-white mt-1">Competencias y Alcances</h3>
+                        </div>
+
+                        <ul class="space-y-4">
+                            @php
+                                $scopes = array_filter(
+                                    array_map('trim', explode("\n", $settings['scopes_and_competencies'])),
+                                );
+                            @endphp
+                            @forelse ($scopes as $scope)
+                                @php
+                                    // Limpiar viñeta inicial si existe
+                                    $cleanScope = ltrim($scope, '•-* ');
+                                @endphp
+                                <li class="flex items-start space-x-3 text-xs md:text-sm font-light leading-relaxed">
+                                    <span
+                                        class="mt-1 flex-shrink-0 w-5 h-5 rounded-full bg-white/10 flex items-center justify-center border border-[#c79b66]/40 text-[#c79b66]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                                d="M5 13l4 4L19 7" />
+                                        </svg>
+                                    </span>
+                                    <span>{{ $cleanScope }}</span>
+                                </li>
+                            @empty
+                                <li class="text-xs text-white/60">Competencias no especificadas.</li>
+                            @endforelse
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Sección: Participación en Eventos y Acciones Realizadas -->
+                <div class="space-y-8 pt-8 border-t border-slate-100">
+                    <div class="flex justify-between items-end">
+                        <div class="space-y-2">
+                            <span class="text-xs uppercase tracking-wider text-[#246257] font-bold">Bitácora
+                                Oficial</span>
+                            <h3 class="text-2xl md:text-3xl font-bold font-serif text-[#5f1b2d]">Participación en
+                                Eventos y Acciones Realizadas</h3>
+                        </div>
+                        <span class="text-xs text-slate-500 hidden sm:inline">Galería y Actividades Recientes</span>
+                    </div>
+
+                    <!-- Grid de Eventos con Fotos y Detalles -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        @php
+                            // Combinamos noticias y eventos para mostrar como acciones realizadas
+                            $actions = collect();
+                            foreach ($news as $n) {
+                                $actions->push([
+                                    'type' => 'Noticia',
+                                    'title' => $n->title,
+                                    'date' => $n->published_at ? $n->published_at->format('d/m/Y') : '',
+                                    'content' => $n->content,
+                                    'image' => $n->image_path,
+                                ]);
+                            }
+                            foreach ($events as $e) {
+                                $actions->push([
+                                    'type' => 'Evento',
+                                    'title' => $e->title,
+                                    'date' => $e->event_date ? $e->event_date->format('d/m/Y') : '',
+                                    'content' => $e->description,
+                                    'image' => $e->image_path,
+                                ]);
+                            }
+                            // Tomar las 3 más recientes
+                            $recentActions = $actions->take(3);
+                        @endphp
+
+                        @forelse($recentActions as $act)
+                            <div @click="openModal('{{ $act['type'] }}', '{{ $act['title'] }}', '{{ $act['date'] }}', '{{ addslashes($act['content']) }}', '{{ $act['image'] }}')"
+                                class="group cursor-pointer rounded-2xl overflow-hidden border border-slate-200 bg-[#fbfbfa] hover:bg-white hover:-translate-y-1.5 transition-all duration-300 shadow-sm">
+                                <div class="h-44 w-full bg-slate-200 overflow-hidden relative">
+                                    @if ($act['image'])
+                                        <img src="{{ asset('storage/' . $act['image']) }}" alt="{{ $act['title'] }}"
+                                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                    @else
+                                        <!-- Placeholder elegante si no hay foto -->
+                                        <div
+                                            class="w-full h-full flex flex-col items-center justify-center bg-gradient-to-tr from-[#5f1b2d]/10 via-[#861e34]/5 to-[#246257]/10 text-[#5f1b2d]/50 p-4">
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="h-10 w-10 text-[#c79b66]/60 mb-2" fill="none"
+                                                viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    stroke-width="1.5"
+                                                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                            </svg>
+                                            <span
+                                                class="text-[10px] uppercase font-bold tracking-widest text-[#246257]">Acción
+                                                Registrada</span>
+                                        </div>
+                                    @endif
+                                    <span
+                                        class="absolute top-3 left-3 bg-[#5f1b2d] text-white text-[9px] uppercase tracking-wider font-bold px-2.5 py-1 rounded-full shadow-sm">
+                                        {{ $act['type'] }}
+                                    </span>
+                                </div>
+                                <div class="p-6 space-y-2">
+                                    <span
+                                        class="text-[9px] uppercase font-bold tracking-widest text-[#c79b66]">{{ $act['date'] }}</span>
+                                    <h4
+                                        class="text-sm font-bold text-slate-900 group-hover:text-[#5f1b2d] transition-colors line-clamp-2 leading-snug">
+                                        {{ $act['title'] }}
+                                    </h4>
+                                    <p class="text-xs text-slate-500 line-clamp-2 font-light leading-relaxed">
+                                        {{ strip_tags($act['content']) }}
+                                    </p>
+                                </div>
+                            </div>
+                        @empty
+                            <div
+                                class="col-span-3 py-12 text-center text-slate-400 font-light bg-slate-50 border border-slate-100 rounded-2xl">
+                                No hay participaciones o acciones registradas.
+                            </div>
+                        @endforelse
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- 4.6 LÍNEAS DE ACCIÓN, COMUNICADOS, EFEMÉRIDES Y COLABORACIONES (Pestaña 3) -->
+        <section id="lineas-accion"
+            class="stack-panel min-h-screen w-full flex flex-col justify-center px-6 py-20 bg-slate-50 relative overflow-hidden border-b border-slate-200">
+            <div class="max-w-6xl w-full mx-auto z-10 space-y-16">
+
+                <!-- Encabezado de la Sección -->
+                <div class="max-w-2xl text-left space-y-3 gsap-fade-in">
+                    <span class="text-xs uppercase tracking-[0.4em] font-bold text-[#c79b66]">Líneas de Acción</span>
+                    <h2 class="text-3xl md:text-4xl font-bold font-serif text-[#5f1b2d]">Detalle del Trabajo y
+                        Colaboración</h2>
+                    <div class="w-16 h-1 bg-[#5f1b2d] mt-2"></div>
+                </div>
+
+                <!-- Grid: Muro de Comunicados y Detalle del Trabajo -->
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+
+                    <!-- Columna Izquierda: Detalle del Trabajo (Líneas de Acción) -->
+                    <div class="col-span-1 md:col-span-6 space-y-6">
+                        <h3 class="text-xl font-bold font-serif text-slate-900 flex items-center space-x-2">
+                            <span class="w-2 h-6 bg-[#246257] inline-block rounded-full"></span>
+                            <span>Trabajo Estratégico</span>
+                        </h3>
+
+                        <div class="space-y-4">
+                            <!-- Card 1 -->
+                            <div
+                                class="bg-white border border-slate-200/80 rounded-2xl p-6 space-y-3 hover:shadow-md transition-shadow">
+                                <div class="flex items-center space-x-3">
+                                    <div
+                                        class="w-8 h-8 rounded-lg flex items-center justify-center bg-[#5f1b2d]/10 text-[#5f1b2d]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                        </svg>
+                                    </div>
+                                    <h4 class="font-bold text-sm text-slate-800 font-serif">1. Transversalización de la
+                                        Perspectiva de Género</h4>
+                                </div>
+                                <p class="text-xs text-slate-600 leading-relaxed font-light">
+                                    Asesoramos y emitimos recomendaciones técnicas en la planeación y desarrollo
+                                    institucional para integrar metas de equidad y no discriminación en todas las áreas
+                                    de la Secretaría.
+                                </p>
+                            </div>
+
+                            <!-- Card 2 -->
+                            <div
+                                class="bg-white border border-slate-200/80 rounded-2xl p-6 space-y-3 hover:shadow-md transition-shadow">
+                                <div class="flex items-center space-x-3">
+                                    <div
+                                        class="w-8 h-8 rounded-lg flex items-center justify-center bg-[#246257]/10 text-[#246257]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                                        </svg>
+                                    </div>
+                                    <h4 class="font-bold text-sm text-slate-800 font-serif">2. Sensibilización y Clima
+                                        Laboral</h4>
+                                </div>
+                                <p class="text-xs text-slate-600 leading-relaxed font-light">
+                                    Coordinamos capacitaciones permanentes, pláticas de prevención del hostigamiento
+                                    sexual y laboral, y promovemos el uso de lenguaje incluyente y no sexista dentro del
+                                    servicio público.
+                                </p>
+                            </div>
+
+                            <!-- Card 3 -->
+                            <div
+                                class="bg-white border border-slate-200/80 rounded-2xl p-6 space-y-3 hover:shadow-md transition-shadow">
+                                <div class="flex items-center space-x-3">
+                                    <div
+                                        class="w-8 h-8 rounded-lg flex items-center justify-center bg-[#c79b66]/10 text-[#c79b66]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                                        </svg>
+                                    </div>
+                                    <h4 class="font-bold text-sm text-slate-800 font-serif">3. Enlace de Quejas y
+                                        Sugerencias</h4>
+                                </div>
+                                <p class="text-xs text-slate-600 leading-relaxed font-light">
+                                    Damos seguimiento seguro y confidencial a las denuncias de hostigamiento o acoso
+                                    laboral a través del buzón oficial, brindando canalización técnica y acompañamiento
+                                    institucional de primer nivel.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Columna Derecha: Muro de Comunicados y Llamamientos -->
+                    <div class="col-span-1 md:col-span-6 space-y-6">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-xl font-bold font-serif text-slate-900 flex items-center space-x-2">
+                                <span class="w-2 h-6 bg-[#c79b66] inline-block rounded-full"></span>
+                                <span>Muro de Comunicados y Llamamientos</span>
+                            </h3>
+                            <a href="#contenido-seccion"
+                                class="text-xs font-bold text-[#5f1b2d] hover:underline uppercase tracking-wider">Ver
+                                Todo</a>
+                        </div>
+
+                        <div class="space-y-4 max-h-[420px] overflow-y-auto pr-2 custom-scrollbar">
+                            @forelse($communiques as $comm)
+                                <div
+                                    class="bg-white border border-slate-100 rounded-2xl p-5 hover:border-[#c79b66]/30 transition-all flex flex-col justify-between shadow-sm relative group">
+                                    <div
+                                        class="absolute inset-y-0 left-0 w-1 bg-[#246257] group-hover:bg-[#5f1b2d] transition-colors rounded-l-full">
+                                    </div>
+
+                                    <div>
+                                        <div
+                                            class="flex justify-between items-center text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-2">
+                                            <span>Boletín Oficial</span>
+                                            <span>{{ $comm->published_at ? $comm->published_at->format('d/m/Y') : '' }}</span>
+                                        </div>
+                                        <h4
+                                            class="text-sm font-bold text-slate-900 group-hover:text-[#5f1b2d] transition-colors line-clamp-2 leading-snug">
+                                            {{ $comm->title }}
+                                        </h4>
+                                        <p class="text-xs text-slate-500 mt-2 line-clamp-2 font-light leading-relaxed">
+                                            {{ $comm->summary }}
+                                        </p>
+                                    </div>
+
+                                    <div class="flex items-center justify-between mt-4 pt-3 border-t border-slate-100">
+                                        @if ($comm->file_path)
+                                            <a href="{{ asset('storage/' . $comm->file_path) }}" target="_blank"
+                                                class="flex items-center space-x-1.5 text-[10px] font-bold uppercase tracking-widest text-[#246257] hover:text-[#5f1b2d] transition-colors">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5"
+                                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2.5"
+                                                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                                </svg>
+                                                <span>Descargar PDF</span>
+                                            </a>
+                                        @else
+                                            <span
+                                                class="text-[9px] text-slate-400 uppercase tracking-widest">Informativo</span>
+                                        @endif
+
+                                        <button
+                                            @click="openModal('Comunicado', '{{ $comm->title }}', '{{ $comm->published_at ? $comm->published_at->format('d/m/Y') : '' }}', '{{ addslashes($comm->summary) }}', '{{ $comm->image_path }}')"
+                                            class="text-[10px] uppercase tracking-wider font-bold text-slate-500 hover:text-[#5f1b2d] transition-colors">
+                                            Ver Detalles
+                                        </button>
+                                    </div>
+                                </div>
+                            @empty
+                                <div
+                                    class="py-8 text-center text-slate-400 font-light bg-white border border-slate-100 rounded-2xl text-xs">
+                                    No hay comunicados o boletines publicados en este momento.
+                                </div>
+                            @endforelse
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Celebraciones de Días y Efemérides -->
+                <div class="space-y-8 pt-8 border-t border-slate-200">
+                    <div class="max-w-xl text-left space-y-2">
+                        <span class="text-xs uppercase tracking-wider text-[#246257] font-bold">Calendario Cívico e
+                            Igualdad</span>
+                        <h3 class="text-2xl font-bold font-serif text-[#5f1b2d]">Celebraciones de Días y Efemérides
+                        </h3>
+                    </div>
+
+                    <!-- Efemérides Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border border-[#c79b66]/25 rounded-3xl overflow-hidden bg-white shadow-sm">
+                        <!-- Efemeride 1 -->
+                        <div
+                            class="glass-card bg-white p-6 space-y-4 hover:bg-slate-50/50 transition-colors relative overflow-hidden group border-b sm:border-b-0 sm:border-r border-[#c79b66]/20">
+                            <div
+                                class="absolute top-0 right-0 w-24 h-24 bg-orange-500/5 rounded-full -mr-8 -mt-8 group-hover:scale-110 transition-transform">
+                            </div>
+                            <div
+                                class="w-10 h-10 rounded-2xl bg-orange-100 text-orange-600 flex items-center justify-center font-bold text-sm">
+                                25
+                            </div>
+                            <div class="space-y-1">
+                                <span class="text-[9px] uppercase font-bold tracking-widest text-orange-600 block">Cada
+                                    Mes</span>
+                                <h4 class="font-bold text-slate-900 text-sm font-serif">Día Naranja</h4>
+                            </div>
+                            <p class="text-xs text-slate-600 font-light leading-relaxed">
+                                Un llamado para actuar, sensibilizar y prevenir la violencia contra las mujeres y las
+                                niñas en todos los ámbitos.
+                            </p>
+                        </div>
+
+                        <!-- Efemeride 2 -->
+                        <div
+                            class="glass-card bg-white p-6 space-y-4 hover:bg-slate-50/50 transition-colors relative overflow-hidden group border-b lg:border-b-0 lg:border-r border-[#c79b66]/20">
+                            <div
+                                class="absolute top-0 right-0 w-24 h-24 bg-purple-500/5 rounded-full -mr-8 -mt-8 group-hover:scale-110 transition-transform">
+                            </div>
+                            <div
+                                class="w-10 h-10 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center font-bold text-sm">
+                                08
+                            </div>
+                            <div class="space-y-1">
+                                <span
+                                    class="text-[9px] uppercase font-bold tracking-widest text-purple-600 block">Marzo</span>
+                                <h4 class="font-bold text-slate-900 text-sm font-serif">Día de la Mujer</h4>
+                            </div>
+                            <p class="text-xs text-slate-600 font-light leading-relaxed">
+                                Conmemoración internacional por la lucha de las mujeres por su participación activa,
+                                igualdad y desarrollo íntegro.
+                            </p>
+                        </div>
+
+                        <!-- Efemeride 3 -->
+                        <div
+                            class="glass-card bg-white p-6 space-y-4 hover:bg-slate-50/50 transition-colors relative overflow-hidden group border-b sm:border-b-0 sm:border-r border-[#c79b66]/20">
+                            <div
+                                class="absolute top-0 right-0 w-24 h-24 bg-red-500/5 rounded-full -mr-8 -mt-8 group-hover:scale-110 transition-transform">
+                            </div>
+                            <div
+                                class="w-10 h-10 rounded-2xl bg-red-100 text-red-600 flex items-center justify-center font-bold text-sm">
+                                25
+                            </div>
+                            <div class="space-y-1">
+                                <span
+                                    class="text-[9px] uppercase font-bold tracking-widest text-red-600 block">Noviembre</span>
+                                <h4 class="font-bold text-slate-900 text-sm font-serif">Eliminación de Violencia</h4>
+                            </div>
+                            <p class="text-xs text-slate-600 font-light leading-relaxed">
+                                Día internacional para visibilizar, cuestionar y erradicar cualquier tipo de violencia
+                                basada en el género.
+                            </p>
+                        </div>
+
+                        <!-- Efemeride 4 -->
+                        <div
+                            class="glass-card bg-white p-6 space-y-4 hover:bg-slate-50/50 transition-colors relative overflow-hidden group">
+                            <div
+                                class="absolute top-0 right-0 w-24 h-24 bg-emerald-500/5 rounded-full -mr-8 -mt-8 group-hover:scale-110 transition-transform">
+                            </div>
+                            <div
+                                class="w-10 h-10 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-sm">
+                                10
+                            </div>
+                            <div class="space-y-1">
+                                <span
+                                    class="text-[9px] uppercase font-bold tracking-widest text-emerald-600 block">Diciembre</span>
+                                <h4 class="font-bold text-slate-900 text-sm font-serif">Derechos Humanos</h4>
+                            </div>
+                            <p class="text-xs text-slate-600 font-light leading-relaxed">
+                                Día mundial que recuerda que la dignidad, la libertad y la justicia son derechos
+                                inalienables de todos.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Colaboraciones Interinstitucionales -->
+                <div class="space-y-8 pt-8 border-t border-slate-200">
+                    <div class="max-w-xl text-left space-y-2">
+                        <span class="text-xs uppercase tracking-wider text-[#246257] font-bold">Red del Sector
+                            Público</span>
+                        <h3 class="text-2xl font-bold font-serif text-[#5f1b2d]">Colaboración con otras Unidades y
+                            Secretarías</h3>
+                    </div>
+
+                    <!-- Colaboradores Grid -->
+                    <div class="grid grid-cols-2 lg:grid-cols-4 border border-slate-200/60 rounded-3xl overflow-hidden bg-white shadow-sm">
+                        <!-- Colaborador 1 -->
+                        <div
+                            class="glass-card bg-white p-6 flex flex-col items-center text-center space-y-3 hover:bg-slate-50/50 transition-colors border-b border-r lg:border-b-0 border-slate-200/60">
+                            <div
+                                class="w-12 h-12 rounded-full bg-[#5f1b2d]/5 flex items-center justify-center text-[#5f1b2d] font-bold text-xs border border-[#5f1b2d]/10">
+                                SIS
+                            </div>
+                            <span class="font-bold text-xs text-slate-800 leading-snug">Secretaría de Igualdad
+                                Sustantiva</span>
+                            <span class="text-[9px] text-[#246257] font-semibold uppercase tracking-wider">Estado de
+                                Puebla</span>
+                        </div>
+
+                        <!-- Colaborador 2 -->
+                        <div
+                            class="glass-card bg-white p-6 flex flex-col items-center text-center space-y-3 hover:bg-slate-50/50 transition-colors border-b lg:border-r lg:border-b-0 border-slate-200/60">
+                            <div
+                                class="w-12 h-12 rounded-full bg-[#246257]/5 flex items-center justify-center text-[#246257] font-bold text-xs border border-[#246257]/10">
+                                DIF
+                            </div>
+                            <span class="font-bold text-xs text-slate-800 leading-snug">Sistema Estatal DIF</span>
+                            <span class="text-[9px] text-[#246257] font-semibold uppercase tracking-wider">Familia e
+                                Inclusión</span>
+                        </div>
+
+                        <!-- Colaborador 3 -->
+                        <div
+                            class="glass-card bg-white p-6 flex flex-col items-center text-center space-y-3 hover:bg-slate-50/50 transition-colors border-r border-slate-200/60">
+                            <div
+                                class="w-12 h-12 rounded-full bg-[#c79b66]/5 flex items-center justify-center text-[#c79b66] font-bold text-xs border border-[#c79b66]/10">
+                                FGE
+                            </div>
+                            <span class="font-bold text-xs text-slate-800 leading-snug">Fiscalía General de
+                                Puebla</span>
+                            <span class="text-[9px] text-[#246257] font-semibold uppercase tracking-wider">Atención y
+                                Justicia</span>
+                        </div>
+
+                        <!-- Colaborador 4 -->
+                        <div
+                            class="glass-card bg-white p-6 flex flex-col items-center text-center space-y-3 hover:bg-slate-50/50 transition-colors">
+                            <div
+                                class="w-12 h-12 rounded-full bg-[#861e34]/5 flex items-center justify-center text-[#861e34] font-bold text-xs border border-[#861e34]/10">
+                                CDH
+                            </div>
+                            <span class="font-bold text-xs text-slate-800 leading-snug">Comisión de Derechos
+                                Humanos</span>
+                            <span class="text-[9px] text-[#246257] font-semibold uppercase tracking-wider">Garantía
+                                Constitucional</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- 4.7 PRONUNCIAMIENTOS Y POSICIONAMIENTOS (Pestaña 4) -->
+        <section id="pronunciamientos"
+            class="stack-panel min-h-screen w-full flex flex-col justify-center px-6 py-20 bg-white relative overflow-hidden border-b border-slate-200">
+            <div class="max-w-6xl w-full mx-auto z-10 space-y-16">
+
+                <!-- Encabezado de la Sección -->
+                <div class="max-w-2xl text-left space-y-3 gsap-fade-in">
+                    <span class="text-xs uppercase tracking-[0.4em] font-bold text-[#246257]">Voces Oficiales</span>
+                    <h2 class="text-3xl md:text-4xl font-bold font-serif text-[#5f1b2d]">Pronunciamientos y Posturas
+                    </h2>
+                    <div class="w-16 h-1 bg-[#c79b66] mt-2"></div>
+                </div>
+
+                <!-- Muro de Pronunciamientos -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    @forelse($pronouncements as $pr)
+                        <div
+                            class="bg-slate-50 border border-slate-100 rounded-3xl p-6 md:p-8 flex flex-col md:flex-row items-center md:items-start gap-6 hover:shadow-md transition-shadow gsap-fade-in relative overflow-hidden group">
+                            <div
+                                class="absolute top-0 right-0 w-32 h-32 bg-[#5f1b2d]/5 rounded-full -mr-12 -mt-12 group-hover:scale-105 transition-transform">
+                            </div>
+
+                            <!-- Foto del Funcionario -->
+                            <div
+                                class="w-24 h-24 md:w-28 md:h-28 rounded-2xl flex-shrink-0 overflow-hidden bg-gradient-to-tr from-[#5f1b2d]/10 to-[#246257]/10 border border-slate-200 shadow-sm relative">
+                                @if ($pr->author_image)
+                                    <img src="{{ asset('storage/' . $pr->author_image) }}"
+                                        alt="{{ $pr->author_name }}" class="w-full h-full object-cover">
+                                @else
+                                    <!-- Fallback Avatar elegante con iniciales -->
+                                    <div
+                                        class="w-full h-full flex flex-col items-center justify-center text-[#5f1b2d] font-bold font-serif">
+                                        <span class="text-2xl tracking-wider">
+                                            @php
+                                                $words = explode(' ', $pr->author_name);
+                                                $initials = '';
+                                                if (isset($words[0])) {
+                                                    $initials .= substr($words[0], 0, 1);
+                                                }
+                                                if (isset($words[1])) {
+                                                    $initials .= substr($words[1], 0, 1);
+                                                }
+                                                echo strtoupper($initials);
+                                            @endphp
+                                        </span>
+                                        <span
+                                            class="text-[8px] uppercase tracking-widest text-[#246257] mt-1 font-semibold">Servidor(a)</span>
+                                    </div>
+                                @endif
+                            </div>
+
+                            <!-- Contenido del Posicionamiento -->
+                            <div class="flex-grow space-y-3 text-center md:text-left z-10">
+                                <div class="space-y-1">
+                                    <span
+                                        class="text-[9px] uppercase font-bold tracking-widest text-[#c79b66] block">Posicionamiento
+                                        Oficial</span>
+                                    <h3 class="text-base md:text-lg font-bold text-slate-900 font-serif leading-tight">
+                                        {{ $pr->title }}
+                                    </h3>
+                                </div>
+
+                                <p class="text-xs text-slate-600 font-light leading-relaxed">
+                                    "{{ $pr->excerpt }}"
+                                </p>
+
+                                <!-- Funcionario info -->
+                                <div class="pt-2 border-t border-slate-200/80">
+                                    <h4 class="text-xs font-bold text-slate-800 leading-snug">{{ $pr->author_name }}
+                                    </h4>
+                                    <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">
+                                        {{ $pr->author_title }}</p>
+                                </div>
+
+                                <!-- Enlace Ver Más Detalles -->
+                                <div class="pt-2">
+                                    <button
+                                        @click="openModal('Pronunciamiento', '{{ $pr->title }}', '{{ $pr->author_name }} | {{ $pr->author_title }}', '{{ addslashes($pr->content) }}', '{{ $pr->author_image }}')"
+                                        class="text-xs font-bold text-[#5f1b2d] hover:text-[#246257] hover:underline uppercase tracking-wider flex items-center space-x-1.5 mx-auto md:mx-0">
+                                        <span>Leer Posicionamiento Completo</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                                d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    @empty
+                        <div
+                            class="col-span-2 py-12 text-center text-slate-400 font-light bg-slate-50 border border-slate-100 rounded-3xl text-xs">
+                            No se han publicado pronunciamientos o posturas oficiales en este momento.
+                        </div>
+                    @endforelse
+                </div>
+
+                <!-- Botón Ver Todos -->
+                <div class="mt-8 flex justify-center">
+                    <a href="{{ route('public.pronouncements') }}"
+                        class="px-8 py-3 rounded-full text-xs font-bold uppercase tracking-wider bg-white border border-[#5f1b2d]/25 text-[#5f1b2d] hover:bg-[#5f1b2d]/5 transition-all shadow-sm">
+                        Ver todos los pronunciamientos
+                    </a>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- 5. TRANSPARENCIA Y RENDICIÓN DE CUENTAS (Sección 5) -->
+        <section id="transparencia"
+            class="stack-panel min-h-screen w-full flex flex-col justify-center px-6 py-20 bg-slate-50 relative overflow-hidden border-b border-slate-200">
+            <div class="max-w-6xl w-full mx-auto z-10 space-y-16">
+
+                <!-- Encabezado de la Sección -->
+                <div class="max-w-2xl text-left space-y-3 gsap-fade-in">
+                    <span class="text-xs uppercase tracking-[0.4em] font-bold text-[#246257]">Rendición de
+                        Cuentas</span>
+                    <h2 class="text-3xl md:text-4xl font-bold font-serif text-[#5f1b2d]">Transparencia Institucional
+                    </h2>
+                    <div class="w-16 h-1 bg-[#c79b66] mt-2"></div>
+                    <p class="text-slate-600 text-xs md:text-sm font-light leading-relaxed">
+                        Accede a la documentación del funcionamiento y normatividad de la Unidad, así como a reportes
+                        visuales de los avances logrados en transversalización e igualdad de género.
+                    </p>
+                </div>
+
+                <!-- Gráficos Simples y Reportes -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Gráfico 1: Sensibilización por Género -->
+                    <div
+                        class="bg-white border border-slate-100 rounded-3xl p-6 md:p-8 flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+                        <div class="space-y-4">
+                            <span class="text-[9px] uppercase tracking-wider font-bold text-slate-400">Distribución de
+                                Impacto</span>
+                            <h3 class="text-base font-bold text-slate-800 font-serif">Sensibilización del Personal</h3>
+                            <p class="text-[11px] text-slate-500 font-light">Porcentaje del personal capacitado y
+                                sensibilizado en la Secretaría por género durante el trimestre actual.</p>
+
+                            <!-- Donut Chart SVG -->
+                            <div class="relative flex justify-center py-6">
+                                <svg class="w-36 h-36" viewBox="0 0 36 36">
+                                    <!-- Background Circle -->
+                                    <circle class="text-slate-100" stroke-width="4" stroke="currentColor"
+                                        fill="none" r="16" cx="18" cy="18" />
+                                    <!-- Segment 1 (Women: 62%) -> stroke-dasharray="62 38" offset starts at 25 (top) -->
+                                    <circle class="text-[#861e34]" stroke-width="4" stroke-dasharray="62 38"
+                                        stroke-dashoffset="25" stroke-linecap="round" stroke="currentColor"
+                                        fill="none" r="16" cx="18" cy="18" />
+                                    <!-- Segment 2 (Men: 38%) -> stroke-dasharray="38 62" offset = 25 - 62 = -37 -->
+                                    <circle class="text-[#246257]" stroke-width="4" stroke-dasharray="38 62"
+                                        stroke-dashoffset="63" stroke-linecap="round" stroke="currentColor"
+                                        fill="none" r="16" cx="18" cy="18" />
+                                </svg>
+                                <!-- Inner Center Text -->
+                                <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+                                    <span class="text-xl font-bold text-slate-800">328</span>
+                                    <span
+                                        class="text-[9px] text-slate-400 uppercase tracking-wider font-medium">Servidores</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Legends -->
+                        <div class="flex justify-around text-[10px] pt-4 border-t border-slate-100">
+                            <div class="flex items-center space-x-1.5">
+                                <span class="w-2.5 h-2.5 rounded-full bg-[#861e34]"></span>
+                                <span class="font-bold text-slate-700">62% Mujeres</span>
+                            </div>
+                            <div class="flex items-center space-x-1.5">
+                                <span class="w-2.5 h-2.5 rounded-full bg-[#246257]"></span>
+                                <span class="font-bold text-slate-700">38% Hombres</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gráfico 2: Avance del Plan Anual de Trabajo -->
+                    <div
+                        class="bg-white border border-slate-100 rounded-3xl p-6 md:p-8 flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+                        <div class="space-y-4 w-full">
+                            <span class="text-[9px] uppercase tracking-wider font-bold text-slate-400">Metas Anuales
+                                2026</span>
+                            <h3 class="text-base font-bold text-slate-800 font-serif">Avance del Plan de Trabajo</h3>
+                            <p class="text-[11px] text-slate-500 font-light">Seguimiento porcentual de las metas
+                                programadas en el Plan Anual de Trabajo vigente (PAT 2026).</p>
+
+                            <!-- Progress Bar Visual -->
+                            <div class="py-6 space-y-4">
+                                <div class="relative pt-1">
+                                    <div class="flex mb-2 items-center justify-between">
+                                        <div>
+                                            <span
+                                                class="text-[10px] font-bold inline-block py-1 px-2.5 uppercase rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
+                                                Avance General
+                                            </span>
+                                        </div>
+                                        <div class="text-right">
+                                            <span class="text-sm font-bold text-emerald-600">85%</span>
+                                        </div>
+                                    </div>
+                                    <div class="overflow-hidden h-3 text-xs flex rounded-full bg-slate-100">
+                                        <div style="width:85%"
+                                            class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-gradient-to-r from-[#246257] to-[#609b84] rounded-full">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Meta list -->
+                                <div class="space-y-2 text-[10px]">
+                                    <div class="flex justify-between text-slate-600">
+                                        <span>Capacitación en Género:</span>
+                                        <span class="font-bold text-slate-800">92%</span>
+                                    </div>
+                                    <div class="flex justify-between text-slate-600">
+                                        <span>Armonización Normativa:</span>
+                                        <span class="font-bold text-slate-800">80%</span>
+                                    </div>
+                                    <div class="flex justify-between text-slate-600">
+                                        <span>Auditoría de Clima Laboral:</span>
+                                        <span class="font-bold text-slate-800">83%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pt-4 border-t border-slate-100 text-center">
+                            <span
+                                class="text-[9px] uppercase tracking-wider text-slate-400 font-bold block">Actualizado
+                                al Segundo Trimestre 2026</span>
+                        </div>
+                    </div>
+
+                    <!-- Gráfico 3: Atención del Buzón y Asesorías -->
+                    <div
+                        class="bg-white border border-slate-100 rounded-3xl p-6 md:p-8 flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+                        <div class="space-y-4">
+                            <span class="text-[9px] uppercase tracking-wider font-bold text-slate-400">Atención
+                                Directa</span>
+                            <h3 class="text-base font-bold text-slate-800 font-serif">Resolución y Enlace</h3>
+                            <p class="text-[11px] text-slate-500 font-light">Efectividad en el procesamiento de quejas,
+                                asesorías directas brindadas y canalizaciones institucionales.</p>
+
+                            <div class="py-4 grid grid-cols-2 gap-4">
+                                <div class="p-3.5 bg-slate-50 rounded-2xl text-center space-y-1">
+                                    <span class="text-2xl font-extrabold text-[#5f1b2d] block">100%</span>
+                                    <span
+                                        class="text-[9px] text-slate-400 uppercase tracking-wider font-medium block">Casos
+                                        Canalizados</span>
+                                </div>
+                                <div class="p-3.5 bg-slate-50 rounded-2xl text-center space-y-1">
+                                    <span class="text-2xl font-extrabold text-[#246257] block">42</span>
+                                    <span
+                                        class="text-[9px] text-slate-400 uppercase tracking-wider font-medium block">Asesorías
+                                        Dadas</span>
+                                </div>
+                                <div class="p-3.5 bg-slate-50 rounded-2xl text-center space-y-1">
+                                    <span class="text-2xl font-extrabold text-[#c79b66] block">5</span>
+                                    <span
+                                        class="text-[9px] text-slate-400 uppercase tracking-wider font-medium block">Secretarías</span>
+                                </div>
+                                <div class="p-3.5 bg-slate-50 rounded-2xl text-center space-y-1">
+                                    <span class="text-2xl font-extrabold text-slate-700 block">98%</span>
+                                    <span
+                                        class="text-[9px] text-slate-400 uppercase tracking-wider font-medium block">Resolución</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pt-4 border-t border-slate-100 text-center">
+                            <span class="text-[9px] uppercase tracking-wider text-slate-400 font-bold block">Protocolo
+                                de Cero Tolerancia Activo</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Biblioteca de Documentos Descargables (Filtrable con Alpine.js) -->
+                <div x-data="{ activeTab: 'Todos' }"
+                    class="space-y-8 bg-white border border-slate-200/80 rounded-3xl p-6 md:p-10 shadow-sm">
+                    <div
+                        class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-100 pb-6">
+                        <div>
+                            <h3 class="text-lg font-bold font-serif text-[#5f1b2d]">Documentación y Repositorio Oficial
+                            </h3>
+                            <p class="text-[11px] text-slate-500 font-light mt-0.5">Consulta y descarga los archivos
+                                que norman y rigen las actividades de la UnIS.</p>
+                        </div>
+
+                        <!-- Tabs de Filtro -->
+                        <div class="flex flex-wrap gap-2 text-xs">
+                            @foreach (['Todos', 'Marco Jurídico', 'Informe Anual', 'Plan Anual de Trabajo', 'Actas de Sesiones'] as $tab)
+                                <button type="button" @click="activeTab = '{{ $tab }}'"
+                                    :class="activeTab === '{{ $tab }}' ? 'bg-[#5f1b2d] text-white border-[#5f1b2d]' :
+                                        'bg-slate-50 text-slate-600 hover:bg-slate-100 border-slate-200/80'"
+                                    class="px-4 py-2 rounded-full border font-bold uppercase tracking-wider text-[9px] transition-all">
+                                    {{ $tab }}
+                                </button>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    <!-- Listado de Documentos -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        @forelse($transparencyDocuments as $doc)
+                            <div x-show="activeTab === 'Todos' || activeTab === '{{ $doc->category }}'"
+                                x-transition:enter="transition ease-out duration-300"
+                                x-transition:enter-start="opacity-0 transform scale-95"
+                                x-transition:enter-end="opacity-100 transform scale-100"
+                                class="p-6 bg-slate-50 hover:bg-white border border-slate-200/70 hover:border-[#c79b66]/30 rounded-3xl flex flex-col justify-between h-[180px] hover:shadow-sm transition-all">
+                                <div class="space-y-2">
+                                    <div
+                                        class="flex justify-between items-center text-[9px] font-bold uppercase tracking-wider text-[#246257]">
+                                        <span>{{ $doc->category }}</span>
+                                        <span
+                                            class="text-slate-400">{{ $doc->published_at ? $doc->published_at->format('d/m/Y') : '' }}</span>
+                                    </div>
+                                    <h4 class="text-sm font-bold text-slate-900 line-clamp-2 leading-snug">
+                                        {{ $doc->title }}</h4>
+                                    <p class="text-xs text-slate-500 font-light line-clamp-2 leading-relaxed">
+                                        {{ $doc->description }}</p>
+                                </div>
+
+                                <div class="flex justify-end pt-3 border-t border-slate-100/50">
+                                    <a href="{{ asset('storage/' . $doc->file_path) }}" target="_blank"
+                                        class="flex items-center space-x-2 text-[10px] font-bold uppercase tracking-widest text-[#5f1b2d] hover:text-[#861e34] transition-colors">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                        </svg>
+                                        <span>Descargar PDF</span>
+                                    </a>
+                                </div>
+                            </div>
+                        @empty
+                            <div class="col-span-2 py-12 text-center text-slate-400 font-light">
+                                No hay documentos de transparencia publicados en esta categoría.
+                            </div>
+                        @endforelse
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- 6. BUZÓN DE DENUNCIAS Y SUGERENCIAS (Sección 6) -->
+        <section id="buzon"
+            class="stack-panel min-h-screen w-full flex flex-col justify-center px-6 py-20 bg-white relative overflow-hidden border-b border-slate-200">
+            <div class="max-w-4xl w-full mx-auto z-10 space-y-12">
+
+                <!-- Encabezado de la Sección -->
+                <div class="max-w-2xl text-left space-y-3 gsap-fade-in mx-auto text-center">
+                    <span class="text-xs uppercase tracking-[0.4em] font-bold text-[#861e34]">Atención Segura</span>
+                    <h2 class="text-3xl md:text-4xl font-bold font-serif text-[#5f1b2d]">Buzón de Sugerencias y
+                        Denuncias</h2>
+                    <div class="w-16 h-1 bg-[#c79b66] mx-auto mt-2"></div>
+                    <p class="text-slate-600 text-xs md:text-sm font-light leading-relaxed max-w-xl mx-auto">
+                        Un espacio seguro y estrictamente confidencial operado por la Unidad de Igualdad Sustantiva para
+                        manifestar tus propuestas o reportar malas conductas, discriminación u hostigamiento laboral.
+                    </p>
+                </div>
+
+                <!-- Mensajes de Respuesta / Success -->
+                @if (session('complaint_success'))
+                    <div
+                        class="bg-emerald-50 dark:bg-emerald-950/20 border-2 border-emerald-500 rounded-3xl p-6 md:p-8 space-y-4 max-w-2xl mx-auto text-center shadow-lg relative">
+                        <div
+                            class="w-12 h-12 rounded-full bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mx-auto">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                    d="M5 13l4 4L19 7" />
+                            </svg>
+                        </div>
+                        <div class="space-y-2">
+                            <h3 class="text-lg font-bold text-slate-800 font-serif">¡Reporte Enviado Exitosamente!</h3>
+                            <p class="text-xs text-slate-600 leading-relaxed font-light">
+                                {{ session('complaint_success') }}
+                            </p>
+                        </div>
+                        <div
+                            class="p-3 bg-white border border-emerald-100 rounded-2xl inline-block text-xs font-bold text-slate-500">
+                            Por motivos de seguridad, este folio es único. Guárdalo para seguimiento administrativo
+                            interno de la UnIS.
+                        </div>
+                    </div>
+                @endif
+
+                <!-- Nota de Advertencia / Seguridad -->
+                <div
+                    class="max-w-2xl mx-auto flex items-start space-x-4 bg-[#5f1b2d]/5 border border-[#5f1b2d]/10 p-5 rounded-3xl text-left">
+                    <div class="p-2.5 bg-[#5f1b2d]/10 text-[#5f1b2d] rounded-2xl flex-shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 15v2m0-6h.01M12 3a9 9 0 00-9 9h9z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 3v9H3a9 9 0 009 9c4.97 0 9-4.03 9-9s-4.03-9-9-9z" />
+                        </svg>
+                    </div>
+                    <div class="space-y-1">
+                        <h4 class="text-xs font-bold text-[#5f1b2d]">Protección y Confidencialidad Garantizada</h4>
+                        <p class="text-[11px] text-slate-600 leading-relaxed font-light">
+                            La Secretaría garantiza el anonimato absoluto si así lo requieres. Tu reporte no creará
+                            registros públicos vinculados a tu cuenta y se canaliza bajo el Protocolo del Órgano Interno
+                            de Control sin riesgo de represalias.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Formulario con Toggle Alpine.js para Anónimo -->
+                <div x-data="{ isAnonymous: true }"
+                    class="bg-slate-50 border border-slate-200 rounded-3xl p-8 md:p-10 max-w-2xl mx-auto shadow-sm">
+                    <form method="POST" action="{{ route('complaints.store') }}" class="space-y-6">
+                        @csrf
+
+                        <!-- Opción Anónimo -->
+                        <div
+                            class="flex items-center justify-between p-4 bg-white border border-slate-200/80 rounded-2xl">
+                            <div class="flex items-center space-x-3">
+                                <div class="p-2 bg-indigo-50 text-indigo-600 rounded-xl">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 15v2m0-6h.01M12 3a9 9 0 00-9 9h9z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <span class="text-xs font-bold text-slate-800 block">Deseo realizar un reporte
+                                        ANÓNIMO</span>
+                                    <span class="text-[10px] text-slate-400 block font-light">No guardaremos datos de
+                                        tu identidad.</span>
+                                </div>
+                            </div>
+
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" name="is_anonymous" value="1" x-model="isAnonymous"
+                                    class="sr-only peer">
+                                <div
+                                    class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#246257]">
+                                </div>
+                            </label>
+                        </div>
+
+                        <!-- Campos del Denunciante Identificado -->
+                        <div x-show="!isAnonymous" x-cloak x-transition:enter="transition ease-out duration-300"
+                            x-transition:enter-start="opacity-0 transform -translate-y-4"
+                            x-transition:enter-end="opacity-100 transform translate-y-0"
+                            class="space-y-4 border-t border-slate-200/80 pt-4">
+                            <span
+                                class="text-[10px] uppercase font-bold tracking-widest text-[#246257] block font-sans">Datos
+                                de Identidad (Confidenciales)</span>
+
+                            <div class="space-y-1">
+                                <label for="complainant_name"
+                                    class="text-[9px] uppercase tracking-widest text-slate-500 font-bold block">Nombre
+                                    Completo</label>
+                                <input type="text" name="complainant_name" id="complainant_name"
+                                    ::required="!isAnonymous"
+                                    class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-[#5f1b2d] placeholder-slate-400"
+                                    placeholder="Escribe tu nombre completo">
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div class="space-y-1">
+                                    <label for="complainant_email"
+                                        class="text-[9px] uppercase tracking-widest text-slate-500 font-bold block">Correo
+                                        Electrónico</label>
+                                    <input type="email" name="complainant_email" id="complainant_email"
+                                        ::required="!isAnonymous"
+                                        class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-[#5f1b2d] placeholder-slate-400"
+                                        placeholder="ejemplo@correo.com">
+                                </div>
+                                <div class="space-y-1">
+                                    <label for="complainant_phone"
+                                        class="text-[9px] uppercase tracking-widest text-slate-500 font-bold block">Teléfono
+                                        de Contacto (Opcional)</label>
+                                    <input type="text" name="complainant_phone" id="complainant_phone"
+                                        class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-[#5f1b2d] placeholder-slate-400"
+                                        placeholder="222-000-0000">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Campos Generales del Reporte (Siempre visibles) -->
+                        <div class="space-y-4 pt-4 border-t border-slate-200/80">
+                            <span
+                                class="text-[10px] uppercase font-bold tracking-widest text-[#5f1b2d] block font-sans">Detalles
+                                del Suceso</span>
+
+                            <div class="space-y-1">
+                                <label for="subject"
+                                    class="text-[9px] uppercase tracking-widest text-slate-500 font-bold block">Asunto
+                                    / Temática Principal</label>
+                                <input type="text" name="subject" id="subject" required
+                                    class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-[#5f1b2d] placeholder-slate-400"
+                                    placeholder="Ej. Comportamiento hostil, propuesta de capacitación, duda de lactario...">
+                            </div>
+
+                            <div class="space-y-1">
+                                <label for="description"
+                                    class="text-[9px] uppercase tracking-widest text-slate-500 font-bold block">Relato
+                                    Detallado</label>
+                                <textarea name="description" id="description" rows="6" required
+                                    class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-[#5f1b2d] placeholder-slate-400 resize-none"
+                                    placeholder="Describe de forma detallada las circunstancias, fechas u oficinas en las que ocurrió la situación..."></textarea>
+                            </div>
+                        </div>
+
+                        <button type="submit"
+                            class="w-full py-3.5 rounded-xl bg-gradient-to-r from-[#5f1b2d] to-[#861e34] hover:opacity-90 transition-all font-bold text-xs uppercase tracking-wider text-white border border-[#c79b66]/30 shadow-md">
+                            Enviar Reporte de Forma Segura
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- 7. CONTACTO & FOOTER -->
+        <section id="contacto"
+            class="stack-panel min-h-[80vh] w-full flex flex-col justify-between px-6 pt-20 pb-0 bg-[#fafaf9] relative overflow-hidden">
+            <div class="max-w-6xl w-full mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 z-10">
+
+                <!-- Información de Contacto -->
+                <div class="col-span-1 md:col-span-5 space-y-8 text-left gsap-fade-in">
+                    <div class="space-y-3">
+                        <span class="text-xs uppercase tracking-[0.3em] font-bold text-[#246257]">Canales de
+                            Atención</span>
+                        <h2 class="text-3xl font-bold font-serif text-slate-900">Contacto</h2>
+                        <p class="text-slate-600 text-xs font-light max-w-sm leading-relaxed">
+                            Estamos a tu disposición para asesoramiento y recepción de solicitudes de igualdad
+                            sustantiva. Comunícate mediante nuestros canales.
+                        </p>
+                    </div>
+
+                    <div class="space-y-6">
+                        <!-- Correo -->
+                        <div class="flex items-start space-x-4">
+                            <div
+                                class="w-10 h-10 rounded-lg flex items-center justify-center bg-slate-50 border border-slate-200 text-[#5f1b2d]">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                            </div>
+                            <div class="space-y-0.5">
+                                <span
+                                    class="text-[9px] uppercase tracking-widest text-slate-400 font-bold block">Correo
+                                    Electrónico</span>
+                                <a href="mailto:{{ $settings['contact_email'] }}"
+                                    class="text-sm font-semibold text-[#5f1b2d] hover:text-[#861e34] transition-colors">
+                                    {{ $settings['contact_email'] }}
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Teléfono -->
+                        <div class="flex items-start space-x-4">
+                            <div
+                                class="w-10 h-10 rounded-lg flex items-center justify-center bg-slate-50 border border-slate-200 text-[#5f1b2d]">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                                </svg>
+                            </div>
+                            <div class="space-y-0.5">
+                                <span
+                                    class="text-[9px] uppercase tracking-widest text-slate-400 font-bold block">Teléfono</span>
+                                <a href="tel:{{ $settings['contact_phone'] }}"
+                                    class="text-sm font-semibold text-[#5f1b2d] hover:text-[#861e34] transition-colors">
+                                    {{ $settings['contact_phone'] }}
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Dirección -->
+                        <div class="flex items-start space-x-4">
+                            <div
+                                class="w-10 h-10 rounded-lg flex items-center justify-center bg-slate-50 border border-slate-200 text-[#5f1b2d]">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                </svg>
+                            </div>
+                            <div class="space-y-0.5">
+                                <span
+                                    class="text-[9px] uppercase tracking-widest text-slate-400 font-bold block">Dirección
+                                    Física</span>
+                                <span class="text-sm text-slate-700 font-light block leading-relaxed">
+                                    {{ $settings['contact_address'] }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Formulario de Contacto General -->
+                <div
+                    class="col-span-1 md:col-span-7 bg-slate-50 border border-slate-200 rounded-3xl p-8 md:p-10 relative overflow-hidden gsap-fade-in shadow-sm">
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-bold font-serif text-[#5f1b2d]">Envíanos un Mensaje</h3>
+                            <p class="text-[11px] text-slate-500 font-light mt-1">
+                                Si deseas solicitar información institucional o realizar consultas sobre nuestras
+                                campañas.
+                            </p>
+                        </div>
+
+                        <form @submit.prevent="alert('Mensaje enviado. Agradecemos tu contacto.');"
+                            class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="space-y-1">
+                                <label class="text-[9px] uppercase tracking-widest text-slate-500 font-bold">Nombre
+                                    completo</label>
+                                <input type="text" required
+                                    class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-[#5f1b2d] placeholder-slate-400"
+                                    placeholder="Escribe tu nombre">
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-[9px] uppercase tracking-widest text-slate-500 font-bold">Correo
+                                    electrónico</label>
+                                <input type="email" required
+                                    class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-[#5f1b2d] placeholder-slate-400"
+                                    placeholder="ejemplo@correo.com">
+                            </div>
+                            <div class="col-span-1 sm:col-span-2 space-y-1">
+                                <label
+                                    class="text-[9px] uppercase tracking-widest text-slate-500 font-bold">Asunto</label>
+                                <input type="text" required
+                                    class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-[#5f1b2d] placeholder-slate-400"
+                                    placeholder="Asunto de la consulta">
+                            </div>
+                            <div class="col-span-1 sm:col-span-2 space-y-1">
+                                <label
+                                    class="text-[9px] uppercase tracking-widest text-slate-500 font-bold">Mensaje</label>
+                                <textarea rows="4" required
+                                    class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-[#5f1b2d] placeholder-slate-400 resize-none"
+                                    placeholder="Describe tu solicitud o comentario..."></textarea>
+                            </div>
+
+                            <div class="col-span-1 sm:col-span-2 pt-2">
+                                <button type="submit"
+                                    class="w-full py-3 rounded-xl bg-gradient-to-r from-[#5f1b2d] to-[#861e34] text-xs font-bold uppercase tracking-wider text-white hover:opacity-90 transition-opacity border border-[#c79b66]/30 shadow-md">
+                                    Enviar Mensaje
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FOOTER LEGAL -->
+            <footer class="py-12 border-t border-slate-200 bg-slate-900 text-white relative z-10 mt-16 w-full">
+                <div
+                    class="max-w-6xl w-full mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6 text-slate-400 text-xs">
+                    <div class="flex flex-col md:flex-row items-center gap-4 text-center md:text-left">
+                        <!-- Logo Footer Veda -->
+                        <img src="{{ asset('img/logos/logo_uis_veda.png') }}" onerror="this.style.display='none';"
+                            alt="UnIS" class="h-9 w-auto object-contain">
+                        <div>
+                            <span class="font-bold tracking-widest text-[#c79b66] font-serif block">UnIS Puebla</span>
+                            <span class="text-[10px] text-slate-500">&copy; {{ date('Y') }} Todos los derechos
+                                reservados.</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-col items-center md:items-end text-center md:text-right gap-1">
+                        <span class="text-[10px] text-[#c79b66] uppercase tracking-widest font-bold">Secretaría de
+                            Planeación, Finanzas y Administración</span>
+                        <span class="text-[9px] text-slate-500 uppercase tracking-wider">Unidad de Igualdad Sustantiva
+                            de
+                            Puebla</span>
+                    </div>
+                </div>
+            </footer>
+        </section>
+
+    </div>
+
+    <!-- 6. MODAL INTERACTIVO DE LECTURA RÁPIDA (Alpine.js) -->
+    <div x-show="showModal" x-cloak x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+        x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+        class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
+        <div @click.away="showModal = false"
+            class="bg-white w-full max-w-2xl rounded-3xl overflow-hidden shadow-2xl relative border border-slate-200"
+            x-transition:enter="transition ease-out duration-300 transform scale-95"
+            x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
+            x-transition:leave="transition ease-in duration-200 transform scale-100"
+            x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95">
+            <!-- Cabecera / Imagen superior -->
+            <div class="relative h-44 bg-[#5f1b2d] flex items-center justify-center border-b border-[#c79b66]/20">
+                <div class="absolute inset-0 bg-gradient-to-r from-[#5f1b2d] to-[#861e34] opacity-90"></div>
+                <span
+                    class="relative z-10 text-white font-serif text-2xl font-bold italic tracking-wide text-gradient-gold"
+                    x-text="modalType"></span>
+
+                <button @click="showModal = false"
+                    class="absolute top-4 right-4 w-8 h-8 rounded-full bg-black/20 border border-white/20 flex items-center justify-center text-white hover:bg-black/40 transition-colors font-bold text-lg">
+                    &times;
+                </button>
+            </div>
+
+            <!-- Contenido -->
+            <div class="p-6 md:p-8 space-y-4 max-h-[60vh] overflow-y-auto bg-white text-slate-800">
+                <div class="flex items-center justify-between text-xs text-slate-400">
+                    <span x-text="modalType.toUpperCase()" class="font-bold tracking-widest text-[#246257]"></span>
+                    <span x-text="modalDate"></span>
+                </div>
+
+                <h3 class="text-lg md:text-xl font-bold font-serif text-slate-900 leading-tight" x-text="modalTitle">
+                </h3>
+
+                <!-- Enlaces adicionales específicos de evento -->
+                <template x-if="modalType === 'Evento' && modalExtra">
+                    <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs space-y-1">
+                        <div class="flex items-center space-x-2 text-slate-700">
+                            <strong>Ubicación:</strong>
+                            <span x-text="modalExtra.split('|')[0] || 'Por definir'"></span>
+                        </div>
+                        <template x-if="modalExtra.split('|')[1]">
+                            <div class="flex items-center space-x-2">
+                                <strong>Enlace:</strong>
+                                <a :href="modalExtra.split('|')[1]" target="_blank"
+                                    class="text-emerald-600 hover:underline font-bold">Acceder al registro /
+                                    transmisión</a>
+                            </div>
+                        </template>
+                    </div>
+                </template>
+
+                <div class="text-xs text-slate-600 leading-relaxed font-light whitespace-pre-wrap"
+                    x-html="modalContent"></div>
+            </div>
+
+            <!-- Footer modal -->
+            <div class="p-4 bg-slate-50 border-t border-slate-200 flex justify-end">
+                <button @click="showModal = false"
+                    class="px-6 py-2 rounded-xl text-xs uppercase tracking-wider bg-white hover:bg-slate-100 border border-slate-200 text-slate-600 font-bold">
+                    Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botón de Salida Rápida (Pánico) -->
+    <a href="https://www.google.com"
+        onclick="event.preventDefault(); window.location.replace('https://www.google.com');"
+        class="fixed bottom-6 right-6 z-50 flex items-center space-x-2 px-5 py-3 rounded-full bg-red-600 hover:bg-red-700 text-white font-bold text-xs uppercase tracking-wider shadow-lg shadow-red-600/30 transition-all duration-300 hover:scale-105 active:scale-95 group"
+        title="Salida de Emergencia: Redirige a Google y elimina historial de retroceso">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5 animate-pulse" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+        </svg>
+        <span
+            class="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-500 ease-out inline-block whitespace-nowrap">
+            Salida Rápida
+        </span>
+        <span class="sm:hidden">Salida Rápida</span>
+        <span class="hidden sm:inline group-hover:hidden">Salida</span>
+    </a>
+
+</body>
+
+</html>
+
