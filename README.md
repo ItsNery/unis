@@ -1,59 +1,126 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# UnIS — Unidad de Igualdad Sustantiva
+> Portal y sistema de administración de la **Unidad de Igualdad Sustantiva (UnIS)** de la Secretaría de Planeación, Finanzas y Administración del Estado de Puebla.
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Este sistema es una plataforma web integral diseñada para la difusión de actividades, transparencia, participación ciudadana y captación de denuncias relativas a la igualdad de género y la prevención de conductas hostiles en el ámbito laboral de la administración pública.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🚀 Características Principales
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 🌐 Portal Público (Experiencia Ciudadana y del Personal)
+*   **Actualidad y Difusión:** Feeds dinámicos de noticias y comunicados oficiales.
+*   **Eventos y Agenda:** Lista de actividades con fechas, ubicaciones y galerías fotográficas autoadministrables para cada evento.
+*   **Pronunciamientos:** Módulo especial para los posicionamientos oficiales de los directivos e integrantes de la Unidad.
+*   **Identidad Organizacional:** Estructura orgánica con fichas individuales de los miembros del equipo, incluyendo áreas, extensiones telefónicas de contacto y frases de compromiso social.
+*   **Transparencia Activa:** Repositorio documental categorizado (Marco Jurídico, Informe Anual, Plan Anual de Trabajo y Actas de Sesiones) organizado mediante un tablero interactivo con pestañas de filtrado.
+*   **Buzón de Denuncias Seguro:** Sistema de captación de reportes o sugerencias que permite envíos anónimos o identificados. Genera un número de folio o ticket único con formato `UNIS-AAAA-XXXX` para el seguimiento del usuario.
+*   **Formulario de Contacto:** Canal directo para dudas y solicitudes generales del portal.
+*   **Evaluación Interactiva (Calidad):** Widget interactivo al pie de página que permite valorar la utilidad del portal con emojis (`😊`, `😐`, `😞`), incluyendo retroalimentación de texto protegido por Cloudflare Turnstile.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 🔐 Panel de Administración (Gestión Interna)
+*   **Autenticación Segura:** Sistema de acceso privado basado en Laravel Breeze.
+*   **Dashboard de Control:** Resumen de mensajes recibidos, estado de denuncias y accesos rápidos.
+*   **Gestores de Contenido (CRUDs):** Control total (crear, editar, eliminar, activar/desactivar) de:
+    *   Noticias
+    *   Eventos y galerías de fotos (subida y borrado asíncrono de imágenes)
+    *   Comunicados y Pronunciamientos
+    *   Documentos de transparencia y subida de archivos PDF
+    *   Banners rotativos del Home
+    *   Métricas e indicadores de impacto
+    *   Miembros de la Organización y Efemérides
+*   **Administrador de Denuncias:** Panel confidencial para la revisión de quejas, actualización de estados (*Recibido*, *En revisión*, *Resuelto*) y registro de notas de seguimiento interno.
+*   **Ajustes Generales:** Configuración dinámica de dirección de contacto, teléfonos, correos y enlaces a redes sociales oficiales.
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## 🛠️ Tecnologías Utilizadas
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+*   **Core:** [Laravel 12.x](https://laravel.com/) (PHP >= 8.2)
+*   **Frontend UI:** [Tailwind CSS](https://tailwindcss.com/) & [Alpine.js](https://alpinejs.dev/)
+*   **Assets Bundler:** [Vite](https://vitejs.dev/)
+*   **Integraciones:** [Cloudflare Turnstile](https://www.cloudflare.com/products/turnstile/) (para la protección contra spam en formularios de contacto y retroalimentación).
+*   **Base de datos:** Soporte completo para MySQL/PostgreSQL y configuración por defecto en SQLite para entornos rápidos de desarrollo.
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 📦 Instalación y Configuración
 
-### Premium Partners
+Sigue estos pasos para desplegar el proyecto localmente o en un servidor:
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### Requisitos Previos
+*   **PHP >= 8.2** (con extensiones requeridas por Laravel como `mbstring`, `openssl`, `xml`, `zip`, `pdo_sqlite` o `pdo_mysql`)
+*   **Composer**
+*   **Node.js & NPM**
 
-## Contributing
+### 1. Clonar el repositorio
+```bash
+git clone https://github.com/ItsNery/unis.git
+cd unis
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 2. Configurar Variables de Entorno
+Copia el archivo `.env.example` y renómbralo a `.env`:
+```bash
+cp .env.example .env
+```
+Abre tu `.env` y configura tus accesos a la base de datos y llaves de Cloudflare Turnstile:
+```env
+# Conexión por defecto a SQLite (creará la base de datos automáticamente si no existe)
+DB_CONNECTION=sqlite
 
-## Code of Conduct
+# O si prefieres MySQL:
+# DB_CONNECTION=mysql
+# DB_HOST=127.0.0.1
+# DB_PORT=3306
+# DB_DATABASE=unis
+# DB_USERNAME=root
+# DB_PASSWORD=
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+# Llaves de Cloudflare Turnstile (Obligatorio para que funcionen los formularios)
+TURNSTILE_SITE_KEY=tu_site_key_aqui
+TURNSTILE_SECRET_KEY=tu_secret_key_aqui
+```
 
-## Security Vulnerabilities
+### 3. Instalación Unificada
+El proyecto cuenta con un script de instalación rápida predefinido en `composer.json` que instalará las dependencias de PHP, generará la llave de seguridad de Laravel, ejecutará las migraciones, sembrará los datos base, instalará dependencias de Node y compilará los archivos de frontend:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+composer run setup
+```
 
-## License
+> [!TIP]
+> **Pasos Manuales Equivalentes:** Si prefieres correr los comandos de manera individual, ejecuta:
+> 1. `composer install`
+> 2. `php artisan key:generate`
+> 3. `php artisan migrate --seed`
+> 4. `npm install`
+> 5. `npm run build`
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 🔑 Credenciales del Administrador por Defecto
+El sembrador (`DatabaseSeeder`) crea una cuenta de administrador inicial:
+*   **Email:** `admin@unis.gob.mx`
+*   **Password:** `admin123`
+
+---
+
+## ⚡ Comandos Útiles de Desarrollo
+
+*   **Servidor de Desarrollo Unificado:** Enciende de manera simultánea el servidor de Laravel, los escuchas de colas (`queues`), el visor de logs `Laravel Pail` y el compilador en tiempo real de Vite:
+    ```bash
+    composer run dev
+    ```
+*   **Ejecución de Pruebas:** Ejecuta la suite de pruebas unitarias y de integración del proyecto:
+    ```bash
+    composer run test
+    ```
+
+---
+
+## 📂 Estructura del Proyecto Clave
+
+*   [`app/Http/Controllers/`](file:///c:/laragon/www/unis-1/app/Http/Controllers/): Controladores que gestionan la lógica pública e interna del portal.
+*   [`app/Models/`](file:///c:/laragon/www/unis-1/app/Models/): Modelos Eloquent de datos del sistema (`Noticia`, `Denuncia`, `Evento`, etc.).
+*   [`resources/views/partials/welcome/`](file:///c:/laragon/www/unis-1/resources/views/partials/welcome/): Componentes individuales y secciones del Home principal público.
+*   [`resources/views/admin/`](file:///c:/laragon/www/unis-1/resources/views/admin/): Vistas de administración interna para los CRUDs.
+*   [`database/migrations/`](file:///c:/laragon/www/unis-1/database/migrations/): Definición del esquema relacional de la base de datos.
+*   [`routes/web.php`](file:///c:/laragon/www/unis-1/routes/web.php): Definición de rutas públicas y privadas agrupadas.
